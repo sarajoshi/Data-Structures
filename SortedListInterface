@@ -1,0 +1,28 @@
+package cpp;
+/**
+ * An interface for a sorted list.
+ * @author SaraJoshi
+ *
+ * @param <T>
+ */
+public interface SortedList<T> {
+	/** Adds a new entry to the list
+    @param newEntry  An object to be added. */
+	public void add(T newEntry);
+
+	/** Removes an item from the list.*/
+	public Node remove();
+
+	/** Finds an item in the list and returns it
+    @return  The item in the list.
+    @throws  NoSuchItem if the list is empty. */
+	public T peek();
+
+	/** Detects whether this list is empty.
+    @return  True if the list is empty. */
+	public boolean isEmpty();
+
+	/** Removes all entries from this stack. */
+	public void clear();
+
+}

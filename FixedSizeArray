@@ -1,0 +1,62 @@
+package cpp;
+
+public class FixedSizeArray<T> implements StackInterface<Object>{
+
+	private T[] stack;
+	private int index=-1;
+	private int size;
+
+
+	@SuppressWarnings("unchecked")
+	public FixedSizeArray(int size) {
+		stack = (T[]) new Object[size];
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void push(Object newEntry) {
+		if (index == size) {
+			throw new Error("The stack is full");
+		} else {
+			index++;
+			stack[++index] = (T) newEntry;
+		}
+	}
+
+	@Override
+	public Object pop() {
+		if(index == -1) {
+			throw new Error("Stack is empty");
+		} else {
+			index--;
+		}
+		return null;
+	}
+
+	@Override
+	public Object peek() {
+		if(index > 0) {
+			return stack[index];
+		} else {
+			throw new Error("Empty stack");
+		}
+	}
+
+	@Override
+	public boolean isEmpty() {
+		if (index == -1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	@Override
+	public void clear() {
+		if (index == -1) {
+			throw new Error("Empty stack") ;
+		} else {
+			for(int i=index; i>0; ++i)
+			index--;
+		}
+	}
+}

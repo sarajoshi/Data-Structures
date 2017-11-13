@@ -1,0 +1,86 @@
+package cpp;
+
+import cpp.Node;
+
+@SuppressWarnings("rawtypes")
+public class PriorityQueue implements PriorityQueueInterface, Comparable {
+
+	private Object tail;
+	private Object head;
+
+	@Override
+	public void add(Comparable newEntry) {
+		if (head.next == tail)// list is empty
+	    {
+	        head.next = newEntry;
+	        newEntry.prev = head;
+	        newEntry.next = tail;
+	        tail.prev = newEntry;
+	    } else {
+	        Node temp = (Node) newEntry;
+	        Node curr = head.next;
+	        while (curr != tail && temp.iData <= curr.iData) {
+	            curr = curr.next;
+	        }
+	        Node tempCurr = curr;
+	        temp.next = tempCurr;
+	        temp.prev = tempCurr.prev;
+	        tempCurr.prev.next = temp;
+	        // Note here that the assignment to tempCurr.prev happens
+	        // after the assignment to tempCurr.prev.next
+	        tempCurr.prev = temp;
+	    }
+	}
+
+	@Override
+	public Comparable remove() {
+		 if (head.next == tail) {
+	            return null;
+	        } else {
+	            Node temp = new Node(0);
+	            temp = head.next;
+	            head.next = temp.next;
+	            temp.next.prev = head;
+	            return (Comparable) temp;
+	        }
+	   }
+
+	@Override
+	public Comparable peek() {
+		return (Comparable) head;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		if (head == null && tail == null) {
+		return true;
+		} else {
+			return false;
+		}
+	}
+
+	@Override
+	public int getSize() {
+		return 0;
+	}
+
+	@Override
+	public void clear() {
+		int size=0;
+		for (int i=0; i<size; ++i) {
+			remove();
+		}
+
+	}
+
+	@Override
+	public int compareTo(Object o, Object oTwo) {
+		if (o == ((Object) oTwo).size()) {
+			return 0;
+		} else {
+			return 1;
+		}
+		return 0;
+	}
+
+}
